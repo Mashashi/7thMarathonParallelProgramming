@@ -1,0 +1,29 @@
+echo off;
+a = textscan(fopen('small1.in'), '%s')
+%a{1,1}
+%a{1,1}(1)
+a{1,1}(1)=[]
+i = a{1}';
+% Convert strings to number
+% i = {'raf'; 'lol'}
+r = []
+p = 1
+[c, l] = size(i)
+ascii_start = double('!')
+while p ~= l+1
+	r(p) = bigbase2dec(double(i{p})-ascii_start,256);
+	p = p+1;
+end
+r = r/max(r);
+
+% hist(r)
+% hist(r,94)
+% bar(hist(r) ./ sum(hist(r)))
+% bar(hist(r,94) ./ sum(hist(r,94)))
+
+bins=94
+XData = 1/bins:1/bins:1;
+[c,l]=size(r)
+bar(XData, hist(r,bins) ./ l)
+
+echo on;
